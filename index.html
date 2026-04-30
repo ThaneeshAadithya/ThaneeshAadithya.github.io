@@ -4,413 +4,720 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thaneesh Aadithya — Platform Engineer & SRE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#24292f;background:#f6f8fa;padding:20px}
-.page{max-width:900px;margin:0 auto}
+:root {
+  --navy: #0F1F3D;
+  --blue: #1B4F8A;
+  --accent: #2E75B6;
+  --teal: #0D7377;
+  --gold: #C9A84C;
+  --light: #F4F6FA;
+  --muted: #6B7A99;
+  --border: #DDE3F0;
+  --white: #FFFFFF;
+  --card: #FAFBFD;
+  --green: #1D9E75;
+  --mono: 'DM Mono', monospace;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'DM Sans', sans-serif;
+}
 
-/* Header */
-.header{background:linear-gradient(135deg,#1B4F8A,#2E75B6);border-radius:16px;padding:40px 32px 32px;text-align:center;color:#fff;margin-bottom:20px}
-.header h1{font-size:36px;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px}
-.header .sub{font-size:16px;opacity:.85;margin-bottom:24px}
-.header .tagline{font-size:13px;opacity:.7;font-style:italic;margin-bottom:24px}
-.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.badge{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:#fff;text-decoration:none;transition:opacity .2s}
-.badge:hover{opacity:.85}
-.b-li{background:#0A66C2}.b-gm{background:#D14836}.b-gh{background:#24292f}.b-ot{background:#2da44e}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Cards grid */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-@media(max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+html { scroll-behavior: smooth; }
 
-/* Generic card */
-.card{background:#fff;border:1px solid #d0d7de;border-radius:12px;padding:20px 24px}
-.card h3{font-size:16px;font-weight:700;color:#1B4F8A;margin-bottom:6px}
-.card p{font-size:13px;color:#555;line-height:1.6}
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-/* Section */
-.section{margin:24px 0}
-.section-title{font-size:20px;font-weight:700;color:#1B4F8A;border-bottom:2px solid #2E75B6;padding-bottom:8px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-name { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue); }
 
-/* Metric cards */
-.metric{background:#fff;border:1px solid #2E75B6;border-radius:12px;padding:18px 12px;text-align:center}
-.metric .val{font-size:26px;font-weight:700;color:#1B4F8A}
-.metric .lbl{font-size:11px;color:#666;margin-top:4px;line-height:1.4}
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 120px 2rem 80px;
+  display: flex; align-items: center;
+  background: linear-gradient(160deg, #F4F6FA 0%, #EBF0F8 40%, #F4F6FA 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,117,182,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -150px; left: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,115,119,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-block;
+  background: var(--green);
+  color: #fff;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+  padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+.hero h1 em { font-style: italic; color: var(--blue); }
+.hero-sub {
+  font-size: 1rem; color: var(--muted); font-weight: 400;
+  margin-bottom: 1.5rem; letter-spacing: 0.02em;
+}
+.hero-desc {
+  font-size: 1.05rem; color: var(--navy); max-width: 640px;
+  margin-bottom: 2rem; line-height: 1.8;
+}
+.hero-desc strong { color: var(--blue); }
+.hero-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 3rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 6px;
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  transition: all 0.2s; cursor: pointer; border: none;
+}
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: var(--navy); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-outline:hover { background: var(--blue); color: #fff; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
 
-/* About YAML */
-.yaml{background:#f6f8fa;border:1px solid #d0d7de;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;padding:16px 20px;font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;line-height:1.9}
-.yaml .k{color:#005CC5;font-weight:600}.yaml .v{color:#032F62}
+/* ── METRICS ── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px; margin-top: 2.5rem;
+}
+.metric {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.metric:hover { border-color: var(--accent); transform: translateY(-2px); }
+.metric-val {
+  font-family: var(--mono);
+  font-size: 1.5rem; font-weight: 500;
+  color: var(--blue); display: block; margin-bottom: 4px;
+}
+.metric-label { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0.03em; }
 
-/* Code blocks */
-pre{background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:14px 18px;font-family:"SFMono-Regular",Consolas,monospace;font-size:12px;line-height:1.7;overflow-x:auto;white-space:pre-wrap;color:#24292f;margin:10px 0}
+/* ── SECTIONS ── */
+section { padding: 80px 2rem; }
+.section-inner { max-width: 900px; margin: 0 auto; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: 2rem; color: var(--navy);
+  margin-bottom: 2rem;
+}
+.section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-/* Tech badges */
-.tech-row{margin-bottom:14px}
-.tech-label{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.techs{display:flex;flex-wrap:wrap;gap:7px}
-.tb{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;color:#fff}
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
+.about-text p strong { color: var(--navy); }
+.about-table { width: 100%; border-collapse: collapse; }
+.about-table tr { border-bottom: 1px solid var(--border); }
+.about-table tr:last-child { border-bottom: none; }
+.about-table td { padding: 10px 0; font-size: 13px; vertical-align: top; }
+.about-table td:first-child { color: var(--muted); font-weight: 500; width: 100px; padding-right: 16px; }
+.about-table td:last-child { color: var(--navy); }
 
-/* Project cards */
-.proj{background:#fff;border:1px solid #d0d7de;border-radius:12px;padding:20px 24px;margin-bottom:14px;border-left:4px solid #1B4F8A;transition:box-shadow .2s}
-.proj:hover{box-shadow:0 4px 12px rgba(27,79,138,.15)}
-.proj-title{font-size:16px;font-weight:700;color:#1B4F8A;margin-bottom:4px}
-.proj-title a{color:#1B4F8A;text-decoration:none}.proj-title a:hover{text-decoration:underline}
-.proj-desc{font-size:13px;color:#666;margin-bottom:10px}
+/* ── SKILLS ── */
+.skills-bg { background: var(--light); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+.skill-card:hover { border-color: var(--accent); }
+.skill-card-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.skill-icon { font-size: 18px; }
+.skill-cat { font-size: 12px; font-weight: 500; color: var(--navy); letter-spacing: 0.03em; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 9px; border-radius: 4px;
+  background: var(--light); color: var(--blue);
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+}
+.tag.green { background: #E8F7F2; color: #0A6B4A; border-color: #B3E0D2; }
+.tag.gold { background: #FBF5E6; color: #8B6914; border-color: #E8D49A; }
+.tag.red { background: #FDECEA; color: #8B2020; border-color: #F4B8B8; }
+.tag.teal { background: #E6F4F4; color: #095C5F; border-color: #A8D8D8; }
 
-/* Table */
-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
-th{background:#1B4F8A;color:#fff;padding:10px 14px;text-align:left;font-weight:600}
-td{padding:10px 14px;border-bottom:1px solid #e6e9ed}
-tr:nth-child(even) td{background:#f6f8fa}
-tr:hover td{background:#dbeafe}
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 24px; padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-dates { font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 4px; }
+.exp-company { font-size: 11px; color: var(--accent); font-weight: 500; margin-top: 4px; }
+.exp-role { font-size: 1rem; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+.exp-sub { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.exp-bullets li {
+  font-size: 13px; color: var(--muted);
+  padding-left: 16px; position: relative; line-height: 1.7;
+}
+.exp-bullets li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--accent); font-size: 11px; top: 3px;
+}
+.exp-bullets li strong { color: var(--navy); font-weight: 500; }
 
-/* Quote */
-.quote{border-left:4px solid #1B4F8A;background:#EBF2FA;border-radius:0 10px 10px 0;padding:16px 20px;margin:14px 0;font-style:italic;color:#333;font-size:14px}
-.quote strong{color:#1B4F8A;font-style:normal}
+/* ── PROJECTS ── */
+.projects-bg { background: var(--light); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+}
+.project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.project-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.project-name { font-size: 14px; font-weight: 500; color: var(--navy); font-family: var(--mono); }
+.project-arrow { color: var(--muted); font-size: 16px; transition: color 0.2s; }
+.project-card:hover .project-arrow { color: var(--accent); }
+.project-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
+.project-outcome {
+  font-size: 11px; font-family: var(--mono);
+  color: var(--green); font-weight: 500;
+  padding: 6px 10px; background: #E8F7F2;
+  border-radius: 4px; margin-bottom: 12px;
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.project-tag {
+  font-size: 10px; font-family: var(--mono);
+  padding: 2px 7px; border-radius: 3px;
+  background: var(--light); color: var(--muted);
+  border: 1px solid var(--border);
+}
 
-/* Open to */
-.open-card{background:#fff;border:1px solid #d0d7de;border-radius:12px;padding:18px}
-.open-card .icon{font-size:24px;margin-bottom:8px}
-.open-card .title{font-weight:700;color:#1B4F8A;font-size:14px;margin-bottom:6px}
-.open-card .body{font-size:13px;color:#555;line-height:1.6}
+/* ── PHILOSOPHY ── */
+.philosophy-card {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 48px;
+  color: #fff;
+}
+.philosophy-quote {
+  font-family: var(--serif);
+  font-size: 1.8rem; font-style: italic;
+  color: #fff; margin-bottom: 2rem;
+  line-height: 1.4;
+  border-left: 3px solid var(--gold);
+  padding-left: 24px;
+}
+.philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.philosophy-item h4 {
+  font-size: 13px; font-weight: 500; color: var(--gold);
+  margin-bottom: 8px; font-family: var(--mono);
+  letter-spacing: 0.05em;
+}
+.philosophy-item p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.7; }
 
-/* Connect */
-.connect{background:linear-gradient(135deg,#EBF2FA,#DBEAFE);border:1px solid #2E75B6;border-radius:12px;padding:28px;text-align:center;margin:20px 0}
-.connect p{color:#444;margin-bottom:16px;font-size:14px}
-.connect-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.connect-btns a{padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:#fff}
-.btn-email{background:#D14836}.btn-li{background:#0A66C2}
+/* ── OPEN TO ── */
+.open-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.open-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  background: var(--card);
+}
+.open-flag { font-size: 24px; margin-bottom: 12px; }
+.open-loc { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+.open-roles { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.open-visa { font-size: 11px; color: var(--accent); font-family: var(--mono); margin-top: 8px; }
 
-/* Footer */
-.footer{background:linear-gradient(135deg,#1B4F8A,#2E75B6);border-radius:12px;padding:18px;text-align:center;color:rgba(255,255,255,.85);font-size:13px;margin-top:20px}
+/* ── CONTACT ── */
+.contact-bg { background: var(--navy); }
+.contact-bg .section-label { color: var(--gold); }
+.contact-bg .section-title { color: #fff; }
+.contact-desc { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.contact-links .btn-primary { background: var(--accent); }
+.contact-links .btn-outline { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3); }
+.contact-links .btn-outline:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.6); }
 
-.cert-ip{color:#E07B00;font-weight:600}
-hr{border:none;border-top:1px solid #d0d7de;margin:20px 0}
-p{color:#444;margin:8px 0}
-strong{color:#1B4F8A}
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 24px 2rem;
+  text-align: center;
+  font-size: 12px; color: rgba(255,255,255,0.3);
+  font-family: var(--mono);
+}
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 1rem 60px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .philosophy-card { padding: 28px; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+  .open-grid { grid-template-columns: 1fr 1fr; }
+  section { padding: 60px 1rem; }
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-<!-- HEADER -->
-<div class="header">
-  <h1>Thaneesh Aadithya</h1>
-  <div class="sub">Senior / Staff Platform Engineer &amp; SRE</div>
-  <div class="tagline">Building the infrastructure that lets engineering teams ship with confidence</div>
-  <div class="badges">
-    <a href="https://www.linkedin.com/in/thaneeshaadithya/" class="badge b-li" target="_blank">💼 linkedin.com/in/thaneeshaadithya</a>
-    <a href="mailto:thaneeshaadithya5@gmail.com" class="badge b-gm">📧 thaneeshaadithya5@gmail.com</a>
-    <a href="https://github.com/ThaneeshAadithya" class="badge b-gh" target="_blank">🐙 github.com/ThaneeshAadithya</a>
-    <span class="badge b-ot">✅ Open to Senior / Staff Roles</span>
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Thaneesh Aadithya</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <span class="hero-badge fade-up">✅ Open to Work — India & Global Remote</span>
+    <h1 class="fade-up delay-1">Thaneesh<br><em>Aadithya</em></h1>
+    <p class="hero-sub fade-up delay-2">Senior Platform Engineer & SRE &nbsp;·&nbsp; DevOps Engineer &nbsp;·&nbsp; Cloud Infrastructure &nbsp;·&nbsp; 7 Years</p>
+    <p class="hero-desc fade-up delay-3">
+      I build and own the platform that <strong>30+ engineering teams</strong> rely on — sustaining <strong>99.9%+ uptime</strong>, tripling deployment frequency, cutting incident detection by <strong>60%</strong>, and compressing environment provisioning from 6 hours to 30 minutes.
+    </p>
+    <div class="hero-links fade-up delay-4">
+      <a href="mailto:thaneeshaadithya5@gmail.com" class="btn btn-primary">📧 Email Me</a>
+      <a href="https://linkedin.com/in/thaneeshaadithya" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+      <a href="https://github.com/ThaneeshAadithya" target="_blank" class="btn btn-ghost">🐙 GitHub</a>
+    </div>
+    <div class="metrics fade-up delay-4">
+      <div class="metric"><span class="metric-val">99.9%+</span><span class="metric-label">Platform Uptime</span></div>
+      <div class="metric"><span class="metric-val">3×</span><span class="metric-label">Faster Deploys</span></div>
+      <div class="metric"><span class="metric-val">↓60%</span><span class="metric-label">MTTD Reduction</span></div>
+      <div class="metric"><span class="metric-val">6h→30m</span><span class="metric-label">Env Provisioning</span></div>
+      <div class="metric"><span class="metric-val">$120K</span><span class="metric-label">Saved / Year</span></div>
+      <div class="metric"><span class="metric-val">0</span><span class="metric-label">P1 Deploy Incidents</span></div>
+      <div class="metric"><span class="metric-val">30+</span><span class="metric-label">Teams Served</span></div>
+    </div>
   </div>
-</div>
+</section>
+
+<hr class="section-divider">
 
 <!-- ABOUT -->
-<div class="section">
-  <div class="section-title">👋 About Me</div>
-  <div class="yaml">
-    <span class="k">name:</span>        <span class="v">Thaneesh Aadithya</span><br>
-    <span class="k">role:</span>        <span class="v">Senior / Staff Platform Engineer &amp; SRE</span><br>
-    <span class="k">experience:</span>  <span class="v">7 years</span><br>
-    <span class="k">location:</span>    <span class="v">Hyderabad, India</span><br>
-    <span class="k">open_to:</span>     <span class="v">Senior / Staff Platform Engineer · SRE · Infrastructure Engineer</span><br>
-    <span class="k">india:</span>       <span class="v">Hyderabad / Bangalore — Senior / Staff roles</span><br>
-    <span class="k">global:</span>      <span class="v">Remote-first companies — UTC±5 overlap available</span><br>
-    <span class="k">relocation:</span>  <span class="v">USA · UK · Canada · Australia · EU — visa eligible</span>
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">About</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Senior Platform Engineer & SRE with <strong>7 years</strong> designing, automating, and operating large-scale cloud-native platforms on AWS — across Fortune-500 product companies and enterprise IT consulting engagements.</p>
+        <p>Equally fluent in agile product-engineering culture and structured service-delivery models. I combine deep infrastructure expertise with SRE practices and DevSecOps to build platforms that teams love and trust.</p>
+        <p>Actively uses <strong>GitHub Copilot, ChatGPT, and Claude</strong> to accelerate IaC authoring, runbook drafting, and architecture documentation.</p>
+      </div>
+      <div>
+        <table class="about-table">
+          <tr><td>📍 Location</td><td>Hyderabad / Bangalore, India</td></tr>
+          <tr><td>🏢 Current</td><td>Target Corporation</td></tr>
+          <tr><td>⏱️ Experience</td><td>7 Years</td></tr>
+          <tr><td>🇮🇳 India</td><td>Hyderabad / Bangalore / Remote</td></tr>
+          <tr><td>🌐 Global</td><td>Remote · UTC+4–UTC+8</td></tr>
+          <tr><td>✈️ Visa</td><td>USA · UK · Canada · AU · EU</td></tr>
+          <tr><td>📧 Email</td><td>thaneeshaadithya5@gmail.com</td></tr>
+        </table>
+      </div>
+    </div>
   </div>
-  <p style="margin-top:14px">I build and own <strong>Internal Developer Platforms</strong> that 30+ engineering teams rely on to ship safely — without needing infrastructure expertise.</p>
-  <p>7 years of production experience on AWS EKS at Fortune-500 scale. Sustained 99.9%+ platform uptime, tripled deployment frequency, and cut incident detection by 60% — through principled IaC, GitOps, SLO-based reliability engineering, and full-stack observability.</p>
-  <p>Currently expanding into <strong>AI Platform Engineering</strong> — GPU infrastructure, LLM serving, and MLOps pipelines on EKS.</p>
-</div>
+</section>
 
-<!-- METRICS -->
-<div class="section">
-  <div class="section-title">📊 Production Impact</div>
-  <div class="grid4">
-    <div class="metric"><div class="val">99.9%+</div><div class="lbl">Platform Uptime (24 months)</div></div>
-    <div class="metric"><div class="val">3×</div><div class="lbl">Faster Deployments</div></div>
-    <div class="metric"><div class="val">~60%</div><div class="lbl">Faster Incident Detection</div></div>
-    <div class="metric"><div class="val">6h→30m</div><div class="lbl">Env Provisioning (−92%)</div></div>
-    <div class="metric"><div class="val">0</div><div class="lbl">P1 Deploy Incidents (18 mo)</div></div>
-    <div class="metric"><div class="val">0</div><div class="lbl">Critical CVEs (12 mo)</div></div>
-    <div class="metric"><div class="val">8 hrs</div><div class="lbl">Weekly Toil Eliminated</div></div>
-    <div class="metric"><div class="val">~30%</div><div class="lbl">Compute Cost Reduced</div></div>
-  </div>
-</div>
+<hr class="section-divider">
 
-<!-- TECH STACK -->
-<div class="section">
-  <div class="section-title">🛠️ Tech Stack</div>
-  <div class="card">
-    <div class="tech-row">
-      <div class="tech-label">☁️ Cloud &amp; Infrastructure</div>
-      <div class="techs">
-        <span class="tb" style="background:#FF9900">AWS</span>
-        <span class="tb" style="background:#326CE5">Kubernetes / EKS</span>
-        <span class="tb" style="background:#7B42BC">Terraform</span>
-        <span class="tb" style="background:#2496ED">Docker</span>
-        <span class="tb" style="background:#0F1689">Helm</span>
-        <span class="tb" style="background:#1B4F8A">Karpenter</span>
-        <span class="tb" style="background:#326CE5">KEDA</span>
-        <span class="tb" style="background:#326CE5">HPA / VPA</span>
-        <span class="tb" style="background:#232F3E">Multi-AZ / DR</span>
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="section-inner">
+    <p class="section-label">Technical Skills</p>
+    <h2 class="section-title">Tech Stack</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">☁️</span><span class="skill-cat">Cloud / AWS</span></div>
+        <div class="skill-tags">
+          <span class="tag">EC2</span><span class="tag">EKS</span><span class="tag">VPC</span><span class="tag">IAM</span><span class="tag">ALB/NLB</span><span class="tag">S3</span><span class="tag">RDS/Aurora</span><span class="tag">ECR</span><span class="tag">Route 53</span><span class="tag">Secrets Manager</span><span class="tag">CloudWatch</span><span class="tag">X-Ray</span><span class="tag green">Azure (AKS)</span><span class="tag green">GCP (GKE)</span>
+        </div>
       </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-label">🔄 CI/CD &amp; GitOps</div>
-      <div class="techs">
-        <span class="tb" style="background:#2088FF">GitHub Actions</span>
-        <span class="tb" style="background:#FC6D26">GitLab CI</span>
-        <span class="tb" style="background:#EF7B4D">Argo CD</span>
-        <span class="tb" style="background:#EF7B4D">Argo Rollouts</span>
-        <span class="tb" style="background:#1B4F8A">GitOps</span>
-        <span class="tb" style="background:#2da44e">Canary / Blue-Green</span>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">☸️</span><span class="skill-cat">Kubernetes</span></div>
+        <div class="skill-tags">
+          <span class="tag">EKS</span><span class="tag">Helm</span><span class="tag">Karpenter</span><span class="tag">HPA</span><span class="tag">VPA</span><span class="tag">KEDA</span><span class="tag">RBAC</span><span class="tag">NetworkPolicies</span><span class="tag">Pod Security</span><span class="tag">Admission Webhooks</span><span class="tag">OTel Operator</span>
+        </div>
       </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-label">📊 Observability</div>
-      <div class="techs">
-        <span class="tb" style="background:#F46800">Grafana</span>
-        <span class="tb" style="background:#E6522C">Prometheus</span>
-        <span class="tb" style="background:#425CC7">OpenTelemetry</span>
-        <span class="tb" style="background:#FF9900">AWS X-Ray</span>
-        <span class="tb" style="background:#1B4F8A">Loki · Mimir · Tempo</span>
-        <span class="tb" style="background:#333">SLO / Error Budgets</span>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">🏗️</span><span class="skill-cat">IaC & Config Mgmt</span></div>
+        <div class="skill-tags">
+          <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">CloudFormation</span><span class="tag">OPA policy-as-code</span><span class="tag">Checkov</span><span class="tag">Remote State</span><span class="tag">Drift Detection</span>
+        </div>
       </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-label">🔒 Security</div>
-      <div class="techs">
-        <span class="tb" style="background:#4D4D4D">OPA Gatekeeper</span>
-        <span class="tb" style="background:#00AEC7">Falco</span>
-        <span class="tb" style="background:#1904DA">Trivy</span>
-        <span class="tb" style="background:#FF9900">Secrets Manager</span>
-        <span class="tb" style="background:#232F3E">IAM / IRSA</span>
-        <span class="tb" style="background:#333">Zero-trust</span>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">🔄</span><span class="skill-cat">CI/CD & GitOps</span></div>
+        <div class="skill-tags">
+          <span class="tag">GitHub Actions</span><span class="tag">Jenkins</span><span class="tag">GitLab CI</span><span class="tag">Argo CD</span><span class="tag">Argo Rollouts</span><span class="tag">Helm</span><span class="tag">GitOps</span><span class="tag">Canary / Blue-Green</span>
+        </div>
       </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-label">🤖 AI / ML Platform (Learning)</div>
-      <div class="techs">
-        <span class="tb" style="background:#412991">vLLM</span>
-        <span class="tb" style="background:#0194E2">MLflow</span>
-        <span class="tb" style="background:#1B4F8A">Kubeflow</span>
-        <span class="tb" style="background:#EF7B4D">KServe</span>
-        <span class="tb" style="background:#326CE5">GPU NodePools</span>
-        <span class="tb" style="background:#232F3E">NVIDIA GPU Operator</span>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">📊</span><span class="skill-cat">Observability</span></div>
+        <div class="skill-tags">
+          <span class="tag teal">OpenTelemetry</span><span class="tag teal">Grafana LGTM</span><span class="tag teal">Prometheus</span><span class="tag teal">Loki</span><span class="tag teal">Tempo</span><span class="tag teal">Mimir</span><span class="tag teal">AWS X-Ray</span><span class="tag teal">SLO Dashboards</span>
+        </div>
       </div>
-    </div>
-    <div class="tech-row">
-      <div class="tech-label">⌨️ Languages &amp; Scripting</div>
-      <div class="techs">
-        <span class="tb" style="background:#3776AB">Python</span>
-        <span class="tb" style="background:#4EAA25">Bash / Shell</span>
-        <span class="tb" style="background:#00ADD8">Go (basic)</span>
-        <span class="tb" style="background:#CB171E">YAML</span>
-        <span class="tb" style="background:#4EAA25">Linux</span>
-        <span class="tb" style="background:#F05032">Git</span>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">🔐</span><span class="skill-cat">Security & SRE</span></div>
+        <div class="skill-tags">
+          <span class="tag red">OPA Gatekeeper</span><span class="tag red">Falco</span><span class="tag red">Trivy</span><span class="tag red">SAST/DAST</span><span class="tag red">CIS Benchmarks</span><span class="tag">SLO/SLI</span><span class="tag">Error Budgets</span><span class="tag">Chaos Engineering</span><span class="tag">Blameless Postmortems</span>
+        </div>
       </div>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">🤖</span><span class="skill-cat">AI Tools</span></div>
+        <div class="skill-tags">
+          <span class="tag gold">GitHub Copilot</span><span class="tag gold">ChatGPT</span><span class="tag gold">Claude</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">💻</span><span class="skill-cat">Scripting & Tools</span></div>
+        <div class="skill-tags">
+          <span class="tag">Python</span><span class="tag">Bash</span><span class="tag">YAML</span><span class="tag">Go (basic)</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">JIRA</span><span class="tag">Confluence</span><span class="tag">ServiceNow</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-head"><span class="skill-icon">🧠</span><span class="skill-cat">AI/ML Infra</span></div>
+        <div class="skill-tags">
+          <span class="tag">GPU NodePools</span><span class="tag">vLLM</span><span class="tag">KServe</span><span class="tag">MLflow</span><span class="tag">Kubeflow</span><span class="tag">KEDA</span><span class="tag">SageMaker</span>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Work History</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-dates">Mar 2023 — Present</div>
+          <div class="exp-company">Target Corporation</div>
+        </div>
+        <div>
+          <div class="exp-role">Senior Platform Engineer & SRE</div>
+          <div class="exp-sub">Platform Engineering · SRE · AWS EKS · Terraform · GitOps · Observability · SLO Engineering · Team Leadership</div>
+          <ul class="exp-bullets">
+            <li><strong>Platform reliability & autoscaling —</strong> sustained 99.9%+ uptime on a ~200-node EKS cluster running 30+ microservices across 4 environments (~5M req/day). HPA + Karpenter absorbs 2–3× surges within 90 sec. Zero downtime across Black Friday & Cyber Monday.</li>
+            <li><strong>SLO engineering —</strong> defined SLIs/SLOs for 30+ services; burn-rate alerting (14.4× fast-burn → page, 6× slow-burn → warn) — reduced alert noise by ~45%.</li>
+            <li><strong>Full-stack observability & OpenTelemetry —</strong> OTel Collector DaemonSet routing ~50M spans/day to Grafana LGTM; 100% trace coverage; single-click alert → trace → log RCA. MTTD ↓60%, RCA time ↓35%.</li>
+            <li><strong>GitOps CI/CD & Terraform IaC —</strong> GitHub Actions → Helm → Argo CD with Argo Rollouts canary (5→25→50→100%). Tripled deploy frequency (~60 releases/week), zero P1 deploy incidents. Terraform module library cut provisioning from 6h to 30min (−92%).</li>
+            <li><strong>FinOps & security —</strong> Karpenter Spot-first saved ~$120K/year. OPA Gatekeeper, Falco, Trivy — zero critical CVEs for 12 months, CIS EKS Benchmark compliant.</li>
+            <li><strong>Leadership —</strong> led & mentored 3-engineer sub-team; bi-weekly SRE sessions adopted by 30+ teams. MTTR &lt;30min for all P1s over 18 months.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-dates">Jun 2022 — Feb 2023</div>
+          <div class="exp-company">Virtusa</div>
+        </div>
+        <div>
+          <div class="exp-role">Cloud Infrastructure Consultant</div>
+          <div class="exp-sub">Multi-Client AWS Infrastructure · Jenkins CI/CD · Terraform at Scale · Consulting Delivery</div>
+          <ul class="exp-bullets">
+            <li><strong>Multi-environment IaC & CI/CD —</strong> architected dev/QA/pre-prod/prod AWS environments for 2 enterprise clients with isolated Terraform state, OPA gates, and Jenkins shared-library pipelines — cut provisioning time ~65%. Presented to client stakeholders at each milestone.</li>
+            <li><strong>Module library & observability —</strong> delivered reusable Terraform module library adopted by 8 engineers; zero state corruption. Introduced OTel SDK tracing — surfaced 5 latency hotspots reducing p99 API latency by ~25%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-dates">Oct 2021 — May 2022</div>
+          <div class="exp-company">Quest Global</div>
+        </div>
+        <div>
+          <div class="exp-role">DevOps Engineer</div>
+          <div class="exp-sub">Containerisation · Jenkins CI/CD · Kubernetes Operations</div>
+          <ul class="exp-bullets">
+            <li><strong>Containerisation & CI/CD —</strong> containerised 10+ microservices with multi-stage Docker builds (distroless, non-root) — cut build time ~35%. Jenkins pipelines (build/test/Trivy/ECR/K8s) — compressed releases from bi-weekly to daily. K8s probe tuning reduced false-positive pages ~45%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-dates">Oct 2019 — Sep 2021</div>
+          <div class="exp-company">Tanama Software</div>
+        </div>
+        <div>
+          <div class="exp-role">Associate Systems Engineer</div>
+          <div class="exp-sub">Linux Systems · AWS Fundamentals · Monitoring & Documentation</div>
+          <ul class="exp-bullets">
+            <li><strong>AWS infra & documentation —</strong> managed Linux-based AWS infra (EC2/VPC/ALB/RDS/DynamoDB/S3/Route 53) for multiple clients maintaining 99%+ SLA. Authored runbooks and SOPs — cut escalations ~30% and reduced onboarding time ~30%.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
 
 <!-- PROJECTS -->
-<div class="section">
-  <div class="section-title">🚀 Featured Projects</div>
-  <p style="font-weight:700;color:#1B4F8A;margin-bottom:12px">Platform Engineering — Production-grade patterns, used in professional work</p>
+<section id="projects" class="projects-bg">
+  <div class="section-inner">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Featured Work</h2>
+    <div class="projects-grid">
 
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/aws-eks-platform-blueprint" target="_blank">🏗️ aws-eks-platform-blueprint</a></div>
-    <div class="proj-desc">The Internal Developer Platform I built and operate in production — open-sourced as a blueprint for 30+ service teams</div>
-    <pre>Terraform modules: VPC · EKS · RDS · IAM · ALB · ECR · Secrets Manager
-Karpenter: Spot-first node provisioning, bin-packing, automatic consolidation
-HPA + KEDA: Pod autoscaling on CPU, RPS, SQS queue depth
-Argo CD: GitOps, App-of-Apps pattern, sync windows, no manual kubectl ever
-Argo Rollouts: Canary (5%→25%→50%→100%) + Blue-Green with Prometheus gates
-OPA Gatekeeper: No :latest tags, resource limits required, probes required
-Falco: Runtime security detection · Multi-AZ: dev / staging / prod isolated
+      <a href="https://github.com/ThaneeshAadithya/aws-eks-platform-blueprint" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">aws-eks-platform-blueprint</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Production-grade platform on EKS — Terraform + Helm + Argo CD. Karpenter, HPA, KEDA, RBAC, OPA Gatekeeper, Secrets Manager, multi-env.</p>
+        <div class="project-outcome">✅ 6h → 30min · 3× deploy frequency · Zero P1 incidents</div>
+        <div class="project-tags"><span class="project-tag">Terraform</span><span class="project-tag">EKS</span><span class="project-tag">Argo CD</span><span class="project-tag">Karpenter</span><span class="project-tag">OPA</span></div>
+      </a>
 
-Outcome: 6h → 30min provisioning · 3× deploy freq · Zero P1 deploy incidents</pre>
+      <a href="https://github.com/ThaneeshAadithya/gitops-cicd-pipeline" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">gitops-cicd-pipeline</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">GitHub Actions → Argo Rollouts canary. 5%→25%→50%→100% with Prometheus analysis gates, sync windows, auto-rollback on SLO breach.</p>
+        <div class="project-outcome">✅ 3× deploy frequency · Zero deployment-caused P1 incidents</div>
+        <div class="project-tags"><span class="project-tag">GitHub Actions</span><span class="project-tag">Argo Rollouts</span><span class="project-tag">Prometheus</span><span class="project-tag">Helm</span></div>
+      </a>
+
+      <a href="https://github.com/ThaneeshAadithya/k8s-observability-stack" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">k8s-observability-stack</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Grafana LGTM + OpenTelemetry Collector + X-Ray. SLO burn-rate alerting, pre-built dashboards, runbook templates per alert.</p>
+        <div class="project-outcome">✅ MTTD ↓60% · RCA time ↓35%</div>
+        <div class="project-tags"><span class="project-tag">OpenTelemetry</span><span class="project-tag">Grafana</span><span class="project-tag">Prometheus</span><span class="project-tag">Loki</span><span class="project-tag">Tempo</span></div>
+      </a>
+
+      <a href="https://github.com/ThaneeshAadithya/aws-secrets-hardening" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">aws-secrets-hardening</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Secrets Manager + ESO + OPA zero-creds enforcement + Falco runtime detection + Checkov IaC scanning. IAM least-privilege patterns.</p>
+        <div class="project-outcome">✅ Zero critical CVEs for 12 consecutive months</div>
+        <div class="project-tags"><span class="project-tag">Secrets Manager</span><span class="project-tag">OPA</span><span class="project-tag">Falco</span><span class="project-tag">Trivy</span><span class="project-tag">Checkov</span></div>
+      </a>
+
+      <a href="https://github.com/ThaneeshAadithya/Incident-runbook" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">incident-runbooks</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Battle-tested SRE runbooks — EKS P1/P2, Terraform state, Argo CD sync, Karpenter, DR/Multi-AZ. Blameless postmortem framework included.</p>
+        <div class="project-outcome">✅ MTTR &lt;30min · Repeat incidents ↓40%</div>
+        <div class="project-tags"><span class="project-tag">SRE</span><span class="project-tag">EKS</span><span class="project-tag">Terraform</span><span class="project-tag">Argo CD</span></div>
+      </a>
+
+      <a href="https://github.com/ThaneeshAadithya/mlops-eks-platform" target="_blank" class="project-card">
+        <div class="project-head">
+          <span class="project-name">mlops-eks-platform</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">AI/ML Platform on EKS — GPU NodePools (Karpenter), vLLM LLM serving, KServe inference with canary rollouts, MLflow, Kubeflow Pipelines, KEDA autoscaling.</p>
+        <div class="project-outcome">🤖 GPU inference · LLM serving · MLOps pipelines</div>
+        <div class="project-tags"><span class="project-tag">vLLM</span><span class="project-tag">KServe</span><span class="project-tag">MLflow</span><span class="project-tag">Kubeflow</span><span class="project-tag">GPU</span></div>
+      </a>
+
+    </div>
   </div>
+</section>
 
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/gitops-cicd-pipeline" target="_blank">🔄 gitops-cicd-pipeline</a></div>
-    <div class="proj-desc">The pipeline behind 3× deployment frequency and zero P1 incidents over 18 months</div>
-    <pre>GitHub Actions → Trivy CVE scan → ECR push → Helm values update
-→ Argo CD detects drift → Argo Rollouts canary deploy
-→ Prometheus analysis gates → auto-promote or auto-rollback
-
-Canary: 5% → 25% → 50% → 100% with success-rate + latency checks
-Sync windows: prod deploys blocked outside business hours
-PR-gated approvals required on all prod syncs
-Auto-rollback triggered if error rate exceeds 1%
-
-Outcome: 3× deployment frequency · Zero deployment-caused P1 incidents</pre>
-  </div>
-
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/k8s-observability-stack" target="_blank">📊 k8s-observability-stack</a></div>
-    <div class="proj-desc">Grafana LGTM + OpenTelemetry — SLO-based alerting, not threshold-based</div>
-    <pre>Grafana LGTM: Loki (logs) · Mimir (metrics) · Tempo (distributed traces)
-Prometheus: scraping, recording rules, alert evaluation
-OpenTelemetry Collector: tail sampling — 100% errors + slow, 1% normal
-AWS X-Ray: distributed tracing across all 30+ services
-
-SLO burn-rate alerting:
-  14.4× burn → immediate page (budget exhausted in ~2 hours)
-  6× burn    → warning (budget exhausted in ~5 days)
-
-Outcome: MTTD reduced ~60% · Consistent same-shift P1 resolution</pre>
-  </div>
-
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/aws-secrets-hardening" target="_blank">🔒 aws-secrets-hardening</a></div>
-    <div class="proj-desc">Zero hard-coded credentials — the pattern behind 12 months of zero critical CVEs</div>
-    <pre>AWS Secrets Manager + External Secrets Operator (ESO)
-IRSA: IAM role per service account — least-privilege per workload
-Automated rotation: zero manual secret management
-OPA Gatekeeper: blocks any deployment containing hardcoded secrets
-Falco: runtime detection of credential file access
-
-Outcome: Zero critical CVEs in production for 12 consecutive months</pre>
-  </div>
-
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/terraform-aws-modules" target="_blank">🏗️ terraform-aws-modules</a></div>
-    <div class="proj-desc">The module library that compressed environment provisioning from 6 hours to 30 minutes</div>
-    <pre>Modules: vpc · eks · karpenter · rds · iam · alb · ecr
-Remote state: S3 + DynamoDB locking — zero state corruption incidents
-Multi-env workspaces: dev / staging / prod with isolated state
-OPA policy-as-code enforcement on all plans
-Drift detection: automated terraform plan in CI on every PR
-
-Outcome: 6h → 30min provisioning · Zero configuration drift</pre>
-  </div>
-
-  <div class="proj">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/incident-runbooks" target="_blank">📋 incident-runbooks</a></div>
-    <div class="proj-desc">Battle-tested SRE runbooks — cut repeat incidents by 40% in 6 months</div>
-    <pre>Runbooks: EKS P1/P2 · Terraform state lock · Argo CD sync failures
-          Karpenter node issues · RDS failover · Multi-AZ DR
-
-Blameless postmortem framework · Escalation paths
-Severity matrix (P1/P2/P3) · On-call rotation design
-
-Outcome: MTTR under 30 minutes for all P1s · Repeat incidents −40%</pre>
-  </div>
-
-  <hr>
-  <p style="font-weight:700;color:#1B4F8A;margin-bottom:12px">🤖 AI Platform Engineering — Personal learning projects, actively building</p>
-
-  <div class="proj" style="border-left-color:#412991">
-    <div class="proj-title"><a href="https://github.com/ThaneeshAadithya/mlops-eks-platform" target="_blank">🤖 mlops-eks-platform</a></div>
-    <div class="proj-desc">Extending the EKS platform for AI/ML workloads — same GitOps, new failure modes</div>
-    <pre>GPU NodePools: Karpenter g5 On-demand (inference) · p3 Spot (training)
-NVIDIA GPU Operator: auto driver install, time-slicing for small models
-vLLM: self-hosted Llama-3 on GPU · cold start management (3-5min warmup)
-KServe: sklearn · PyTorch · ONNX · scale-to-zero when idle (cost saving)
-MLflow: experiment tracking + model registry + S3 artifact storage
-Kubeflow Pipelines: train → evaluate → register → deploy (full lifecycle)
-KEDA: scale on request queue depth / Kafka lag / Prometheus RPS / cron
-
-Observability extensions:
-  GPU memory utilization alerts (85% threshold — OOM is silent in GPU)
-  Token throughput per model · Cost per 1k tokens dashboard
-  Model drift monitoring · Inference SLO compliance
-
-Key insight: LLMs = stateful, GPU-hungry services with unusual failure modes.
-Same platform thinking applies: Karpenter, KEDA, Argo CD, OpenTelemetry.</pre>
-  </div>
-</div>
-
-<!-- CERTIFICATIONS -->
-<div class="section">
-  <div class="section-title">🎓 Certifications</div>
-  <table>
-    <tr><th>Certification</th><th>Issuer</th><th>Status</th></tr>
-    <tr><td>AWS Certified DevOps Engineer – Professional</td><td>Amazon Web Services</td><td class="cert-ip">🟡 In Progress</td></tr>
-    <tr><td>Certified Kubernetes Administrator (CKA)</td><td>CNCF / Linux Foundation</td><td class="cert-ip">🟡 In Progress</td></tr>
-    <tr><td>AWS Certified Solutions Architect – Associate</td><td>Amazon Web Services</td><td class="cert-ip">🟡 In Progress</td></tr>
-    <tr><td>Terraform Associate</td><td>HashiCorp</td><td class="cert-ip">🟡 In Progress</td></tr>
-  </table>
-</div>
+<hr class="section-divider">
 
 <!-- PHILOSOPHY -->
-<div class="section">
-  <div class="section-title">💭 How I Think About This Work</div>
-  <div class="quote">
-    <strong>"The pipeline isn't the product. Confidence is."</strong><br><br>
-    Engineers shipping 10× a day aren't brave. Their platform made risk invisible.
-    GitOps doesn't make deployments faster — it makes the consequences of a bad deployment
-    smaller, auditable, and recoverable. That's what tier-1 engineering culture actually looks like from the inside.
-  </div>
-  <div class="grid2" style="margin-top:14px">
-    <div class="card">
-      <h3>SRE asks...</h3>
-      <p><em>"How do I eliminate the toil that keeps pulling engineers away from building?"</em><br><br>
-      Tools: SLOs, error budgets, incident response, blameless postmortems, chaos engineering.</p>
-    </div>
-    <div class="card">
-      <h3>Platform Engineering asks...</h3>
-      <p><em>"How do I build the internal product that 30 teams use to ship without needing infrastructure expertise?"</em><br><br>
-      Tools: IDP, golden-path pipelines, self-service provisioning, GitOps, developer experience.</p>
+<section id="philosophy">
+  <div class="section-inner">
+    <p class="section-label">Philosophy</p>
+    <h2 class="section-title">How I Think About This Work</h2>
+    <div class="philosophy-card">
+      <p class="philosophy-quote">"The pipeline isn't the product. Confidence is."</p>
+      <div class="philosophy-grid">
+        <div class="philosophy-item">
+          <h4>SRE asks...</h4>
+          <p>"How do I eliminate the toil that keeps pulling engineers away from building?" Tools: SLOs, error budgets, incident response, blameless postmortems, chaos engineering.</p>
+        </div>
+        <div class="philosophy-item">
+          <h4>Platform Engineering asks...</h4>
+          <p>"How do I build the product that 30 teams use to ship without needing infrastructure expertise?" Tools: golden-path pipelines, self-service provisioning, GitOps, developer experience.</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<hr class="section-divider">
 
 <!-- OPEN TO -->
-<div class="section">
-  <div class="section-title">🌍 Open To</div>
-  <div class="grid3">
-    <div class="open-card">
-      <div class="icon">📍</div>
-      <div class="title">India — Hyderabad / Bangalore</div>
-      <div class="body">
-        Roles: <strong>Senior / Staff Platform Engineer · SRE</strong><br>
-        Open to hybrid and on-site roles<br>
-        Product companies · FinTech · E-commerce · MNCs
+<section id="open">
+  <div class="section-inner">
+    <p class="section-label">Availability</p>
+    <h2 class="section-title">Open To</h2>
+    <div class="open-grid">
+      <div class="open-card">
+        <div class="open-flag">📍</div>
+        <div class="open-loc">India</div>
+        <div class="open-roles">Hyderabad / Bangalore / Pan-India Remote<br>Senior / Staff Platform Engineer · SRE · DevOps · Cloud Infra</div>
       </div>
-    </div>
-    <div class="open-card">
-      <div class="icon">🌐</div>
-      <div class="title">Global Remote</div>
-      <div class="body">
-        <strong>UTC±5 overlap availability</strong><br>
-        Staff Platform Engineer · Staff SRE<br>
-        Remote-first product companies worldwide
+      <div class="open-card">
+        <div class="open-flag">🌐</div>
+        <div class="open-loc">Global Remote</div>
+        <div class="open-roles">UTC+4–UTC+8 overlap<br>Senior / Staff Platform Engineer · SRE</div>
       </div>
-    </div>
-    <div class="open-card">
-      <div class="icon">✈️</div>
-      <div class="title">Relocation</div>
-      <div class="body">
-        🇺🇸 USA — H-1B / L-1 Visa<br>
-        🇬🇧 UK — Skilled Worker Visa<br>
-        🇨🇦 Canada — Express Entry<br>
-        🇦🇺 Australia — 482 TSS Visa<br>
-        🇩🇪 🇳🇱 🇮🇪 EU — Blue Card<br>
-        <em>Eligible for all visa pathways</em>
+      <div class="open-card">
+        <div class="open-flag">🇺🇸</div>
+        <div class="open-loc">USA</div>
+        <div class="open-roles">Senior / Staff Platform · SRE</div>
+        <div class="open-visa">H-1B / L-1 Visa</div>
+      </div>
+      <div class="open-card">
+        <div class="open-flag">🇬🇧</div>
+        <div class="open-loc">United Kingdom</div>
+        <div class="open-roles">Senior / Staff Platform · SRE</div>
+        <div class="open-visa">Skilled Worker Visa</div>
+      </div>
+      <div class="open-card">
+        <div class="open-flag">🇨🇦</div>
+        <div class="open-loc">Canada</div>
+        <div class="open-roles">Senior / Staff Platform · SRE</div>
+        <div class="open-visa">Express Entry</div>
+      </div>
+      <div class="open-card">
+        <div class="open-flag">🇦🇺</div>
+        <div class="open-loc">Australia</div>
+        <div class="open-roles">Senior / Staff Platform · SRE</div>
+        <div class="open-visa">482 TSS Visa</div>
+      </div>
+      <div class="open-card">
+        <div class="open-flag">🇪🇺</div>
+        <div class="open-loc">Europe</div>
+        <div class="open-roles">Germany · Netherlands · Ireland<br>Senior / Staff Platform · SRE</div>
+        <div class="open-visa">EU Blue Card</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- CONNECT -->
-<div class="connect">
-  <p>If you're <strong>hiring</strong> for a Staff Platform Engineer or SRE role, <strong>building</strong> an AI infrastructure team, or want to discuss platform engineering at scale — I'd love to connect.</p>
-  <div class="connect-btns">
-    <a href="mailto:thaneeshaadithya5@gmail.com" class="btn-email">📧 thaneeshaadithya5@gmail.com</a>
-    <a href="https://www.linkedin.com/in/thaneeshaadithya/" class="btn-li" target="_blank">💼 linkedin.com/in/thaneeshaadithya</a>
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="contact-desc">Hiring for a Senior / Staff Platform Engineer, SRE, DevOps, or Cloud Infrastructure role? Building an AI infrastructure team? I'd love to connect.</p>
+    <div class="contact-links">
+      <a href="mailto:thaneeshaadithya5@gmail.com" class="btn btn-primary">📧 thaneeshaadithya5@gmail.com</a>
+      <a href="https://linkedin.com/in/thaneeshaadithya" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+      <a href="https://github.com/ThaneeshAadithya" target="_blank" class="btn btn-outline">🐙 GitHub</a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="footer">
-  References and architecture samples available on request &nbsp;·&nbsp; github.com/ThaneeshAadithya
-</div>
+<footer>
+  References, architecture diagrams & case studies available on request &nbsp;·&nbsp; github.com/ThaneeshAadithya &nbsp;·&nbsp; thaneeshaadithya.github.io
+</footer>
 
-</div>
 </body>
 </html>
